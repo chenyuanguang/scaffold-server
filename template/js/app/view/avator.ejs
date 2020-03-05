@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>users</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+            box-sizing: border-box;
+        }
+        body{
+            width: 144px;
+            height: 144px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        img {
+            display: block;
+            width:  72px;
+            height:  72px;
+            float: left;
+            border: 1px solid transparent;
+        }
+        .images1 img{
+            width: 144px;
+            height: 144px;
+        }
+        .images3 img:first-child{
+            margin: 0 36px;
+        }
+        .one {
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="images<%=images.length%>">
+    <% images.forEach(function(item, index){%>
+    <% if(images.length > 1) {%>
+        <img src="<%=item %>" alt="">
+    <% } else {%>
+        <img src="<%=item %>" alt="" class="one">
+    <% }}) %>
+</body>
+</html>

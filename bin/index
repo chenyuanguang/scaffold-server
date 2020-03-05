@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+
+var program = require('commander');
+let Buddha = require("../lib/Buddha.js")
+program
+    .usage('<command> [options]')
+    .description("自动化搭建node项目")
+    .action(() => {
+        console.log("创建一个项目")
+    })
+    .version('1.0.0')
+
+program.on('--help', () => {
+        let str=`
+        author：chenyuanguang
+        使用说明：
+          #查看node版本：
+            "必须保证node在7.3以上版本"
+          #创建项目：
+             cmuxser init
+        =======================
+        `
+        console.log(str+Buddha)
+})
+program.parse(process.argv);

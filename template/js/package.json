@@ -1,0 +1,40 @@
+{
+  "name": "animefactory-service",
+  "version": "1.0.0",
+  "description": "漫画工厂",
+  "main": "app.js",
+  "scripts": {
+    "build:docker": "docker build -t ux.baozengzhang.sys.serv .",
+    "dev": "yarn && export NODE_ENV=dev && nodemon app.js",
+    "test": "yarn && export NODE_ENV=test && node app.js",
+    "pro": "export NODE_ENV=pro && node app.js",
+    "pm2:env": "yarn && pm2 startOrGracefulReload pm2.json --env env",
+    "pm2:test": "yarn && pm2 del pm2.json && pm2 update && pm2 startOrGracefulReload pm2.json --env test",
+    "pm2:pro": "yarn && pm2 del pm2.json && pm2 update && pm2 startOrGracefulReload pm2.json --env pro"
+  },
+  "dependencies": {
+    "@sentry/node": "^5.11.0",
+    "archiver": "^3.1.1",
+    "axios": "0.19.0",
+    "cos-nodejs-sdk-v5": "^2.5.12",
+    "crypto": "^1.0.1",
+    "date-utils": "^1.2.21",
+    "ejs": "^2.7.1",
+    "ftp": "^0.3.10",
+    "ftp-deploy": "^2.3.5",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.6.2",
+    "koa-body": "^4.0.6",
+    "koa-router": "^7.4.0",
+    "koa-send": "^5.0.0",
+    "koa-static": "^5.0.0",
+    "koa-views": "^6.2.1",
+    "mongoose": "^5.7.1",
+    "puppeteer": "^1.20.0",
+    "sequelize": "^5.21.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.liebaopay.com/CMUX/internal-animefactory-service"
+  }
+}

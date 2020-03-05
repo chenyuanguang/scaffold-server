@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>cmuxser配置</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <style>
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+        .title{
+            text-align: center;
+            margin:20px 0;
+        }
+        h3{
+            margin:40px 0 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="title">node-server配置</h2>
+        <form class="needs-validation" novalidate action="#">
+            <div class="container">
+                <h3>项目描述</h3>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="projectName">项目名</label>
+                        <input type="text" class="form-control" value="test" id="projectName" name="projectName" required>
+                    </div>
+                    <div class="form-group col">
+                        <label for="author">创建者</label>
+                        <input type="text" class="form-control" value="cmux" id="author" name="author" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="description">描述</label>
+                        <input type="text" class="form-control" value="基于node的服务端项目" id="description" name="description">
+                    </div>
+                    <div class="form-group col">
+                        <label for="email">邮箱</label>
+                        <input type="text" class="form-control" value="zhangsan@cmcm.com" id="email" name="email">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <h3>项目配置</h3>
+                
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="host">host</label>
+                        <input type="text" class="form-control" value="127.0.0.1" id="host" name="host">
+                    </div>
+                    <div class="form-group col">
+                        <label for="port">port</label>
+                        <input type="text" class="form-control" value="5000" id="port" name="port">
+                    </div>
+                </div>
+                <div class="form-row">
+                    
+                    <div class="form-group col">
+                        <label for="templateType">项目语法</label>
+                        <select class="form-control" id="templateType" value="js" name="templateType">
+                            <option>js</option>
+                            <option>ts</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+           
+            <!-- <button type="submit" class="btn btn-primary" id="next">下一步</button> -->
+            <button type="submit" class="btn btn-primary" id="next">创建</button>
+        </form>
+
+    </div>
+    <script src="/js/jquery.validate.min.js"></script>
+    <script src="/js/addMethod.js"></script>
+    <script>
+        $(() => {
+            $.extend({
+                //将序列化的参数转换为对象
+                serializeToObj(str) {
+                    var obj = {}
+                    str.split("&").map((i) => {
+                        var itemarr = i.split("=")
+                        obj[itemarr[0]] = itemarr[1]
+                    })
+                    return obj
+                }
+            })
+            $(".needs-validation").validate({
+                rules: {
+                    projectName: {
+                        required: true
+                    },
+                    author:{
+                        required: true
+                    },
+                    description:{
+                        required: true
+                    },
+                    email:{
+                        required: true
+                    },
+                    templateType: {
+                        required: true
+                    },
+                    host: {
+                        required: true
+                    },
+                    port: {
+                        required: true
+                    }
+                },
+                messages: {
+                    projectName: { required: "项目名不能为空" },
+                    author: { required: "作者不能为空" },
+                    description: { required: "描述不能为空" },
+                    email: { required: "邮箱不能为空" },
+                    templateType: { required: "请选择模板" },
+                    host: { equalTo: "请输入主机号" },
+                    port: { equalTo: "请输入端口号" }
+                },
+                submitHandler: function (form, event) {
+                    event.preventDefault()
+                    //验证通过后进行注册
+                    next();
+                }
+            });
+            function next() {
+               sessionStorage.setItem("baseConfig",JSON.stringify($.serializeToObj($(".needs-validation").serialize())))
+            //    window.location.replace("/view/gitlab")
+            }
+
+
+        })
+
+    </script>
+</body>
+
+</html>

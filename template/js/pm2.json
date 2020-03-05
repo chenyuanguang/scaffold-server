@@ -1,0 +1,22 @@
+{
+    "apps": {
+        "name": "animefactory-service",
+        "script": "app.js",
+        "exec_mode": "cluster_mode",
+        "instances": 2,
+        "max_memory_restart": "1000M",
+        "min_uptime": "30s",
+        "max_restarts": "5",
+        "error_file": "./logs/err.log",
+        "out_file": "./logs/out.log",
+        "env": {
+            "NODE_ENV": "dev"
+        },
+        "env_test": {
+            "NODE_ENV": "test"
+        },
+        "env_pro": {
+            "NODE_ENV": "pro"
+        }
+    }
+}
